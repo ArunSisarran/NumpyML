@@ -48,3 +48,31 @@ print(slope)
 3. Code will print -7.9995
 Its not the code you suggested because it doesn't have the exponential value in it
 '''
+
+x = np.array([1.0,2.0,3.0])
+y = np.array([2.0,4.0,6.0])
+
+def loss(w):
+    return np.mean((w*x-y) ** 2) 
+
+h=0.0001 
+w=0.0
+
+#for i in range(20):
+#    slope = (loss(w+h) - loss(w)) / h
+#    w = w - 0.05 * slope
+#    print(w)
+#    print(loss(w))
+
+def grad(w):
+    return np.mean(2*(w*x-y)*x)
+
+numerical = (loss(w+h) - loss(w)) / h
+print(grad(w), numerical)
+
+w=0.0
+lr=0.05
+
+for i in range(20):
+    w = w-lr*grad(w)
+    print(w, loss(w))
